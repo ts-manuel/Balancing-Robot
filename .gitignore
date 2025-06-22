@@ -1,4 +1,6 @@
 .venv
 .vscode
 MATLAB/slprj/
+MATLAB/*.asv
+MATLAB/*.slxc
 MUJOCO_LOG.TXT
