@@ -19,7 +19,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Simulation of a balancing robot with mujoco.
+Simulation of a balancing robot with mujoco.\
+See the [notebook](Python/simulation.ipynb).
 
 
 <!-- INSTALLING PREREQUISITES -->
