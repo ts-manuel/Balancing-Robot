@@ -1,5 +1,6 @@
 .venv
 .vscode
+*.pyc
 MATLAB/slprj/
 MATLAB/*.asv
 MATLAB/*.slxc

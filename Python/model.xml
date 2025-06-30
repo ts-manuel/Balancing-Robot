@@ -1,0 +1,49 @@
+<mujoco model="balancing robot">
+    <option integrator="RK4" timestep="0.001"/>
+
+    <visual>
+        <global offheight="2160" offwidth="3840"/>
+        <quality offsamples="8"/>
+    </visual>
+
+    <asset>
+        <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3"
+            rgb2=".2 .3 .4" width="300" height="300"/>
+        <material name="grid" texture="grid" texrepeat="8 8" reflectance=".2"/>
+
+        <texture name="wheel" type="2d" builtin="checker" rgb1=".1 .1 .1"
+            rgb2=".5 .5 .5" width="300" height="300"/>
+        <material name="wheel" texture="wheel" texrepeat="2 2" reflectance=".2"/>
+    </asset>
+
+    <worldbody>
+        <geom size="1 1 .01" type="plane" material="grid"/>
+        <light pos="0 0 1"/>
+        <camera name="closeup" pos=".3 -.4 .25" xyaxes="1 .8 0 0 1 2"/>
+        <body name="top" pos="0 0 0">
+            <joint name="top" type="free"/>
+            <site name="IMU" pos="0 0 .04"/>
+            <geom name="body" type="box" size=".0275 .080 .075" pos="0 0 .095" mass=".46" rgba="1 0 0 1" contype="2" conaffinity="2"/>
+            <body name="right wheel" pos="0 0 .02">
+                <joint name="right wheel" type="hinge" axis="0 1 0" pos="0 0 .02" damping="0.0001"/>
+                <geom name="right wheel" type="cylinder" pos="0 -0.1 .02" size="0.04 .0175" mass=".04" zaxis="0 1 0" material="wheel"/>
+            </body>
+            <body name="left wheel" pos="0 0 .02">
+                <joint name="left wheel" type="hinge" axis="0 1 0" pos="0 0 .02" damping="0.0001"/>
+                <geom name="left wheel" type="cylinder" pos="0 0.1 .02" size="0.04 .0175" mass=".04" zaxis="0 1 0" material="wheel"/>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <motor name="motor right" joint="right wheel" gear="1"/>
+        <motor name="motor left" joint="left wheel" gear="1"/>
+    </actuator>
+
+    <sensor>
+        <accelerometer name="accelerometer" site="IMU"/>
+        <framezaxis name="top z axis" objtype="body" objname="top"/>
+        <frameyaxis name="top y axis" objtype="body" objname="top"/>
+    </sensor>
+    
+</mujoco>
