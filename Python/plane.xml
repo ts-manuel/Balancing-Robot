@@ -1,0 +1,47 @@
+<mujoco model="plane">
+    <option integrator="RK4" timestep="0.001"/>
+
+    <visual>
+        <global offheight="2160" offwidth="3840"/>
+        <quality offsamples="8"/>
+    </visual>
+
+    <asset>
+        <mesh file="../3D Models/piper_pa18/obj/piper_pa18.obj"/>
+        <texture name="piper_diffuse" type="2d" colorspace="linear"
+            file="../3D Models/piper_pa18/obj/textures/piper_diffuse.png"/>
+        <texture name="piper_bump" type="2d" colorspace="linear"
+            file="../3D Models/piper_pa18/obj/textures/piper_bump.png"/>
+        <texture name="piper_refl" type="2d" colorspace="linear"
+            file="../3D Models/piper_pa18/obj/textures/piper_refl.png"/>
+
+
+        <material name="material_plane">
+            <layer texture="piper_diffuse" role="rgb"/>
+            <layer texture="piper_bump" role="normal"/>
+            <layer texture="piper_refl" role="metallic"/>
+        </material>
+
+        <texture name="grid" type="2d" builtin="checker" rgb1=".1 .2 .3"
+            rgb2=".2 .3 .4" width="300" height="300"/>
+        <material name="grid" texture="grid" texrepeat="8 8" reflectance=".2"/>
+    </asset>
+
+    <worldbody>
+        <geom size="10 10 .01" type="plane" material="grid"/>
+        <light pos="0 0 20"/>
+        <camera name="closeup" pos="6 -8 5" xyaxes="1 .8 0 0 1 2"/>
+        <body name="plane" pos="0 0 1.5" euler="90 -35 -20">
+            <joint type="hinge" axis="1 0 0"/>
+            <site name="IMU" pos="0 0 0"/>
+            <geom type="mesh" mesh="piper_pa18" material="material_plane"/>
+        </body>
+    </worldbody>
+
+    <sensor>
+        <accelerometer name="accelerometer" site="IMU"/>
+        <framezaxis name="top z axis" objtype="body" objname="plane"/>
+        <frameyaxis name="top y axis" objtype="body" objname="plane"/>
+    </sensor>
+    
+</mujoco>
