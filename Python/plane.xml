@@ -1,5 +1,5 @@
 <mujoco model="plane">
-    <option integrator="RK4" timestep="0.001"/>
+    <option integrator="RK4" timestep="0.001" gravity="0 0 -9.81"/>
 
     <visual>
         <global offheight="2160" offwidth="3840"/>
@@ -31,10 +31,10 @@
         <geom size="10 10 .01" type="plane" material="grid"/>
         <light pos="0 0 20"/>
         <camera name="closeup" pos="6 -8 5" xyaxes="1 .8 0 0 1 2"/>
-        <body name="plane" pos="0 0 1.5" euler="90 -35 -20">
-            <joint type="hinge" axis="1 0 0"/>
+        <body name="plane" pos="0 0 1.5" euler="90 0 0">
+            <joint name="center" type="ball" pos="0 0 0"/>
             <site name="IMU" pos="0 0 0"/>
-            <geom type="mesh" mesh="piper_pa18" material="material_plane"/>
+            <geom type="mesh" mesh="piper_pa18" material="material_plane" contype="2" conaffinity="2"/>
         </body>
     </worldbody>
 
